@@ -47,7 +47,11 @@ img { max-width: 100%; }
   align-items: stretch;
   min-height: 54px;
   border-bottom: 2px solid var(--ink);
-  background: var(--rose);
+  background-color: var(--rose);
+  background-image: linear-gradient(rgba(255,255,255,.08),rgba(44,18,27,.08)),var(--cloth-one);
+  background-position: center;
+  background-size: auto,360px auto;
+  background-repeat: repeat,repeat-x;
   font: 800 11px/1.05 'Courier New', monospace;
   letter-spacing: .035em;
 }
@@ -91,7 +95,7 @@ figcaption { display: flex; justify-content: space-between; gap: 18px; padding-t
 .channel-card:nth-child(6n+2), .channel-card:nth-child(6n+5) { grid-column: span 3; }
 .channel-cover { position: relative; overflow: hidden; aspect-ratio: 4/3; border: 2px solid var(--ink); background: var(--paper-soft); }
 .channel-card:nth-child(4n+2) .channel-cover { aspect-ratio: 3/4; }
-.channel-cover.tone-rose { background: var(--rose); }
+.channel-cover.tone-rose { background: var(--cloth-one) center/cover no-repeat; }
 .channel-cover.tone-sage { background: var(--sage); }
 .channel-cover.tone-straw { background: var(--straw); }
 .channel-cover.tone-blue { background: var(--powder); }
@@ -107,7 +111,7 @@ figcaption { display: flex; justify-content: space-between; gap: 18px; padding-t
 .channel-card:hover .channel-meta b { transform: rotate(45deg); }
 
 .about { display: grid; grid-template-columns: minmax(320px,.9fr) minmax(0,1.1fr); gap: 7vw; align-items: center; padding: 110px 4.5vw; border-block: 2px solid var(--ink); background: var(--straw); }
-.about-cloth { padding: 14px; border: 2px solid var(--ink); background: var(--rose); box-shadow: 12px 12px 0 #4b3037; transform: rotate(-1deg); }
+.about-cloth { padding: 14px; border: 2px solid var(--ink); background: var(--cloth-one) center/cover no-repeat; box-shadow: 12px 12px 0 #4b3037; transform: rotate(-1deg); }
 .about-cloth img { display: block; width: 100%; aspect-ratio: 4/3; object-fit: cover; }
 .about-copy h2 { font-size: clamp(48px, 7vw, 112px); }
 .about-copy > p:last-child { max-width: 760px; margin: 34px 0 0; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(20px,1.8vw,29px); line-height: 1.2; }

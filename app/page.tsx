@@ -30,6 +30,7 @@ type ArchiveChannel = {
 
 const mainChannels = archiveData.channels as ArchiveChannel[];
 const nestedChannels = archiveData.nestedChannels as Record<string, ArchiveChannel>;
+const placeholderTones = ['tone-rose', 'tone-sage', 'tone-straw', 'tone-blue'] as const;
 
 const copy = {
   en: {
@@ -38,7 +39,6 @@ const copy = {
     enter: 'Enter the archive ↓',
     about: 'About the troupe',
     aboutBody: 'Dongcun Xinfu works through imperfect copying. We learn from living Chaoshan opera and iron-rod puppetry, build low-tech stages, recruit locally, and let every stop rewrite the troupe.',
-    fighter: 'The sewing machine is always our fighter jet.',
     arenaDoor: 'Complete archive on Are.na',
     instagramDoor: 'Dongcun Xinfu on Instagram',
     channel: 'Channel',
@@ -61,7 +61,6 @@ const copy = {
     enter: '进入档案 ↓',
     about: '关于剧团',
     aboutBody: '东村新妇以“不完整的临摹”工作。我们向活着的潮剧与铁枝木偶戏学习，搭建低技术舞台，沿途公开招募，让每一站重新改写剧团。',
-    fighter: '缝纫机始终是我们的战斗机。',
     arenaDoor: 'Are.na 整体档案',
     instagramDoor: '东村新妇 Instagram',
     channel: '频道',
@@ -291,7 +290,7 @@ export default function Home() {
           <div className="channel-list">
             {mainChannels.map((channel, index) => (
               <button className="channel-card" key={channel.slug} onClick={() => openChannel(channel.slug)}>
-                <div className={`channel-cover ${channel.cover ? '' : index % 2 ? 'cloth-two' : 'cloth-one'}`}>
+                <div className={`channel-cover ${channel.cover ? '' : placeholderTones[index % placeholderTones.length]}`}>
                   {channel.cover && <img src={channel.cover.src} alt="" loading="lazy" />}
                   <span>{String(index + 1).padStart(2, '0')}</span>
                 </div>
@@ -307,11 +306,6 @@ export default function Home() {
         <section className="about" id="about">
           <div className="about-cloth"><img src="/arena/bed-stage.jpg" alt="A temporary Dongcun Xinfu stage made from a bed" loading="lazy" /></div>
           <div className="about-copy"><p className="section-kicker">SHANZHAI IS A METHOD</p><h2>{copy[language].about}</h2><p>{copy[language].aboutBody}</p></div>
-        </section>
-
-        <section className="fighter-line" aria-label={copy[language].fighter}>
-          <p>{copy[language].fighter}</p>
-          <span>SEW / BUILD / FLY</span>
         </section>
 
         <section className="external-gates" aria-label="External links">

@@ -1,24 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
-  <rect width="800" height="600" fill="#eadfcb"/>
-  <g fill="none" stroke-linecap="round">
-    <path d="M-80 4 C100 68 250-38 430 18 S710 86 880 16" stroke="#a9bda4" stroke-width="78" opacity=".72"/>
-    <path d="M-80 29 C105 92 250-10 430 44 S710 111 880 40" stroke="#f0c3c0" stroke-width="28" opacity=".88"/>
-    <path d="M-80 55 C108 118 255 16 438 70 S714 138 880 66" stroke="#d39aa4" stroke-width="10" opacity=".82"/>
-    <path d="M-80 132 C110 190 245 92 430 145 S718 221 880 147" stroke="#c8b383" stroke-width="52" opacity=".62"/>
-    <path d="M-80 147 C110 205 245 108 430 161 S718 236 880 162" stroke="#f0c9ba" stroke-width="18" opacity=".9"/>
-    <path d="M-80 245 C98 300 260 206 434 260 S707 331 880 266" stroke="#9ebaa9" stroke-width="84" opacity=".62"/>
-    <path d="M-80 270 C98 326 260 231 434 286 S707 357 880 291" stroke="#efe2c6" stroke-width="24" opacity=".93"/>
-    <path d="M-80 295 C98 350 260 256 434 310 S707 382 880 316" stroke="#d59aa6" stroke-width="12" opacity=".82"/>
-    <path d="M-80 390 C112 448 246 351 432 404 S716 477 880 410" stroke="#e3b2a5" stroke-width="72" opacity=".72"/>
-    <path d="M-80 411 C112 469 246 372 432 425 S716 498 880 431" stroke="#d292a1" stroke-width="18" opacity=".9"/>
-    <path d="M-80 510 C96 566 260 474 432 526 S710 597 880 534" stroke="#9fb8a7" stroke-width="82" opacity=".64"/>
-    <path d="M-80 534 C96 590 260 497 432 550 S710 621 880 558" stroke="#ead0b0" stroke-width="27" opacity=".96"/>
-    <path d="M-80 557 C96 612 260 520 432 573 S710 644 880 580" stroke="#d6939f" stroke-width="10" opacity=".86"/>
-  </g>
-  <g fill="none" stroke="#f8f2e5" stroke-width="2" opacity=".55">
-    <path d="M-40 83 C130 136 277 54 450 102 S700 166 850 111"/>
-    <path d="M-40 208 C130 260 277 178 450 226 S700 290 850 235"/>
-    <path d="M-40 346 C130 399 277 317 450 365 S700 428 850 374"/>
-    <path d="M-40 469 C130 522 277 440 450 488 S700 551 850 497"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <pattern id="wave-weave" width="256" height="256" patternUnits="userSpaceOnUse">
+      <rect width="256" height="256" fill="#eadfcb"/>
+      <g fill="none" stroke-linecap="round">
+        <path d="M-256 0 C-213-26-171-26-128 0S-43 26 0 0S85-26 128 0S213 26 256 0S341-26 384 0S469 26 512 0" stroke="#9eb9a6" stroke-width="70" opacity=".72"/>
+        <path d="M-256 3 C-213-23-171-23-128 3S-43 29 0 3S85-23 128 3S213 29 256 3S341-23 384 3S469 29 512 3" stroke="#f1c2bd" stroke-width="27" opacity=".92"/>
+        <path d="M-256 8 C-213-18-171-18-128 8S-43 34 0 8S85-18 128 8S213 34 256 8S341-18 384 8S469 34 512 8" stroke="#c8798c" stroke-width="8" opacity=".82"/>
+        <path d="M-256 86 C-213 60-171 60-128 86S-43 112 0 86S85 60 128 86S213 112 256 86S341 60 384 86S469 112 512 86" stroke="#d1bd91" stroke-width="55" opacity=".64"/>
+        <path d="M-256 88 C-213 62-171 62-128 88S-43 114 0 88S85 62 128 88S213 114 256 88S341 62 384 88S469 114 512 88" stroke="#f2cabe" stroke-width="17" opacity=".88"/>
+        <path d="M-256 94 C-213 68-171 68-128 94S-43 120 0 94S85 68 128 94S213 120 256 94S341 68 384 94S469 120 512 94" stroke="#cc8796" stroke-width="6" opacity=".76"/>
+        <path d="M-256 171 C-213 145-171 145-128 171S-43 197 0 171S85 145 128 171S213 197 256 171S341 145 384 171S469 197 512 171" stroke="#9fb9aa" stroke-width="72" opacity=".67"/>
+        <path d="M-256 174 C-213 148-171 148-128 174S-43 200 0 174S85 148 128 174S213 200 256 174S341 148 384 174S469 200 512 174" stroke="#ead6b7" stroke-width="26" opacity=".96"/>
+        <path d="M-256 180 C-213 154-171 154-128 180S-43 206 0 180S85 154 128 180S213 206 256 180S341 154 384 180S469 206 512 180" stroke="#d58f9e" stroke-width="9" opacity=".84"/>
+      </g>
+      <g fill="none" stroke="#f8f2e5" stroke-width="2" opacity=".48">
+        <path d="M-256 46 C-213 20-171 20-128 46S-43 72 0 46S85 20 128 46S213 72 256 46S341 20 384 46S469 72 512 46"/>
+        <path d="M-256 129 C-213 103-171 103-128 129S-43 155 0 129S85 103 128 129S213 155 256 129S341 103 384 129S469 155 512 129"/>
+        <path d="M-256 218 C-213 192-171 192-128 218S-43 244 0 218S85 192 128 218S213 244 256 218S341 192 384 218S469 244 512 218"/>
+      </g>
+    </pattern>
+  </defs>
+  <rect width="512" height="512" fill="url(#wave-weave)"/>
 </svg>

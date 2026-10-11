@@ -34,10 +34,13 @@ const nestedChannels = archiveData.nestedChannels as Record<string, ArchiveChann
 const copy = {
   en: {
     archive: 'Live archive',
-    intro: 'An open-source, itinerant Shanzhai Teochew opera troupe rooted in Dongcun, Chaoshan — copying, sewing, learning, drifting and making a stage wherever we land.',
+    intro: 'An open-source, itinerant Shanzhai Chaoshan opera troupe rooted in Dongcun — copying, sewing, learning, drifting and making a stage wherever we land.',
     enter: 'Enter the archive ↓',
     about: 'About the troupe',
-    aboutBody: 'Dongcun Xinfu works through imperfect copying. We learn from living Teochew opera and iron-rod puppetry, build low-tech stages, recruit locally, and let every stop rewrite the troupe. This website mirrors the archive channel by channel, in its original order.',
+    aboutBody: 'Dongcun Xinfu works through imperfect copying. We learn from living Chaoshan opera and iron-rod puppetry, build low-tech stages, recruit locally, and let every stop rewrite the troupe.',
+    fighter: 'The sewing machine is always our fighter jet.',
+    arenaDoor: 'Complete archive on Are.na',
+    instagramDoor: 'Dongcun Xinfu on Instagram',
     channel: 'Channel',
     blocks: 'blocks',
     close: 'Close',
@@ -57,7 +60,10 @@ const copy = {
     intro: '一个扎根潮汕东村、开源且持续漂流的山寨潮剧团：临摹、缝纫、学习、上路，在每一次停靠的地方重新搭起戏台。',
     enter: '进入档案 ↓',
     about: '关于剧团',
-    aboutBody: '东村新妇以“不完整的临摹”工作。我们向活着的潮剧与铁枝木偶戏学习，搭建低技术舞台，沿途公开招募，让每一站重新改写剧团。这个网站逐一保留频道和区块的原始顺序。',
+    aboutBody: '东村新妇以“不完整的临摹”工作。我们向活着的潮剧与铁枝木偶戏学习，搭建低技术舞台，沿途公开招募，让每一站重新改写剧团。',
+    fighter: '缝纫机始终是我们的战斗机。',
+    arenaDoor: 'Are.na 整体档案',
+    instagramDoor: '东村新妇 Instagram',
     channel: '频道',
     blocks: '个区块',
     close: '关闭',
@@ -249,8 +255,14 @@ export default function Home() {
 
   return (
     <>
+      <div className="stage-intro" aria-hidden="true">
+        <div className="stage-intro-panel stage-intro-left"><img src="/arena/371.jpg" alt="" /></div>
+        <div className="stage-intro-panel stage-intro-right"><img src="/arena/371.jpg" alt="" /></div>
+        <div className="stage-intro-title"><span>入场 / ENTER</span><strong>DONGCUN XINFU</strong></div>
+      </div>
+
       <header className="topbar">
-        <a className="wordmark" href="#top">DONGCUN XINFU SHANZHAI TEOCHEW OPERA TROUPE</a>
+        <a className="wordmark" href="#top">DONGCUN XINFU SHANZHAI CHAOSHAN OPERA TROUPE</a>
         <nav><a href="#archive">{copy[language].archive}</a><a href="#about">{copy[language].about}</a></nav>
         <LanguageSwitch language={language} onChange={toggleLanguage} />
       </header>
@@ -259,12 +271,12 @@ export default function Home() {
         <section className="hero">
           <div className="hero-copy">
             <p className="eyebrow">OPEN-SOURCE / ITINERANT / SHANZHAI</p>
-            <h1><span>DONGCUN XINFU</span><span>SHANZHAI</span><span>TEOCHEW OPERA</span><span>TROUPE</span></h1>
+            <h1><span>DONGCUN XINFU</span><span>SHANZHAI</span><span>CHAOSHAN OPERA</span><span>TROUPE</span></h1>
             <p className="intro">{copy[language].intro}</p>
             <a className="enter-link" href="#archive">{copy[language].enter}</a>
           </div>
           <figure className="hero-image-wrap">
-            <img className="hero-image" src="/arena/371.jpg" alt="Puppets resting on a small Teochew opera stage" />
+            <img className="hero-image" src="/arena/371.jpg" alt="Puppets resting on a small Chaoshan opera stage" />
             <figcaption><span>{copy[language].fieldNote}</span><span>371.JPG</span></figcaption>
           </figure>
         </section>
@@ -296,9 +308,23 @@ export default function Home() {
           <div className="about-cloth"><img src="/arena/bed-stage.jpg" alt="A temporary Dongcun Xinfu stage made from a bed" loading="lazy" /></div>
           <div className="about-copy"><p className="section-kicker">SHANZHAI IS A METHOD</p><h2>{copy[language].about}</h2><p>{copy[language].aboutBody}</p></div>
         </section>
+
+        <section className="fighter-line" aria-label={copy[language].fighter}>
+          <p>{copy[language].fighter}</p>
+          <span>SEW / BUILD / FLY</span>
+        </section>
+
+        <section className="external-gates" aria-label="External links">
+          <a href="https://www.are.na/m4a6blpm_hc" target="_blank" rel="noreferrer">
+            <span>01</span><strong>{copy[language].arenaDoor}</strong><b>↗</b>
+          </a>
+          <a href="https://instagram.com/dongcunxinfu?psln=MXg0enRqNm81eWN4aw%3D%3D" target="_blank" rel="noreferrer">
+            <span>02</span><strong>{copy[language].instagramDoor}</strong><b>↗</b>
+          </a>
+        </section>
       </main>
 
-      <footer><strong>DONGCUN XINFU</strong><p>DONGCUN XINFU SHANZHAI TEOCHEW OPERA TROUPE</p><span>{copy[language].synced}</span></footer>
+      <footer><strong>DONGCUN XINFU</strong><p>DONGCUN XINFU SHANZHAI CHAOSHAN OPERA TROUPE</p><span>{copy[language].synced}</span></footer>
 
       {selectedChannel && (
         <ChannelView

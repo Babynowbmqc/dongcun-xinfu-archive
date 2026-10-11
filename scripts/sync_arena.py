@@ -49,8 +49,8 @@ CHANNEL_TITLES = {
 }
 
 EXACT_TRANSLATIONS = {
-    "东村新妇山寨剧团": "Dongcun Xinfu Shanzhai Teochew Opera Troupe",
-    "东村新妇潮剧团": "Dongcun Xinfu Shanzhai Teochew Opera Troupe",
+    "东村新妇山寨剧团": "Dongcun Xinfu Shanzhai Chaoshan Opera Troupe",
+    "东村新妇潮剧团": "Dongcun Xinfu Shanzhai Chaoshan Opera Troupe",
 }
 
 

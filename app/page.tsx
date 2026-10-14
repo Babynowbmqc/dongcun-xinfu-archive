@@ -51,7 +51,6 @@ const copy = {
     openSource: 'Open external source ↗',
     openFile: 'Open file ↗',
     nested: 'Open nested channel →',
-    synced: 'Archive snapshot · 12 Oct 2026',
     fieldNote: 'FIELD NOTE 001 · PUPPET STAGE, CHAOSHAN',
     workingTranslation: 'Chinese originals / English working translations',
   },
@@ -73,11 +72,21 @@ const copy = {
     openSource: '打开外部来源 ↗',
     openFile: '打开文件 ↗',
     nested: '打开嵌套频道 →',
-    synced: '档案快照 · 2026 年 10 月 12 日',
     fieldNote: 'FIELD NOTE 001 · 潮汕木偶戏台',
     workingTranslation: '中文原文 / 英文工作译文',
   },
 };
+
+function syncedLabel(language: Language) {
+  const date = new Date(`${archiveData.syncedAt}T00:00:00+08:00`);
+  const formatted = new Intl.DateTimeFormat(language === 'zh' ? 'zh-CN' : 'en-GB', {
+    day: 'numeric',
+    month: language === 'zh' ? 'long' : 'short',
+    year: 'numeric',
+    timeZone: 'Asia/Shanghai',
+  }).format(date);
+  return language === 'zh' ? `档案快照 · ${formatted}` : `Archive snapshot · ${formatted}`;
+}
 
 function text(value: Localized | undefined, language: Language) {
   if (!value) return '';
@@ -285,7 +294,7 @@ export default function Home() {
         <section className="archive-section" id="archive">
           <div className="section-heading">
             <div><p className="section-kicker">ARE.NA STRUCTURE / LOCAL ARCHIVE</p><h2>{copy[language].archive}</h2></div>
-            <p>{copy[language].synced}<br />{copy[language].workingTranslation}</p>
+            <p>{syncedLabel(language)}<br />{copy[language].workingTranslation}</p>
           </div>
           <div className="channel-list">
             {mainChannels.map((channel, index) => (
@@ -318,7 +327,7 @@ export default function Home() {
         </section>
       </main>
 
-      <footer><strong>DONGCUN XINFU</strong><p>DONGCUN XINFU SHANZHAI CHAOSHAN OPERA TROUPE</p><span>{copy[language].synced}</span></footer>
+      <footer><strong>DONGCUN XINFU</strong><p>DONGCUN XINFU SHANZHAI CHAOSHAN OPERA TROUPE</p><span>{syncedLabel(language)}</span></footer>
 
       {selectedChannel && (
         <ChannelView

@@ -12,8 +12,10 @@ import json
 import os
 import re
 import sys
+from datetime import datetime
 from pathlib import Path
 from typing import Any
+from zoneinfo import ZoneInfo
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -52,6 +54,36 @@ EXACT_TRANSLATIONS = {
     "东村新妇山寨剧团": "Dongcun Xinfu Shanzhai Chaoshan Opera Troupe",
     "东村新妇潮剧团": "Dongcun Xinfu Shanzhai Chaoshan Opera Troupe",
 }
+
+MANUAL_TRANSLATIONS = {
+    "东村新妇反面": "Dongcun Xinfu — Reverse",
+    "制造麻烦正面": "Making Trouble — Front",
+    "东村新妇山寨剧团 《五福连--仙姬送子》2025 乐手：小纳、丝丝、J、乐怡、叉车 控偶：苗子、寻羊 戏台制作：苗子、阿瑜、馗、刀刀 摄影：馗 编剧：六合彩苗、乐怡 寻找全国各地演出场地，欢迎合作洽谈~ #diy戏剧 #山寨五福连#山寨潮剧#Teochewdialect#shanzhai Teochew Opera#潮剧《仙姬送子》#铁枝木偶戏 #潮剧五福连": "Dongcun Xinfu Shanzhai Chaoshan Opera Troupe, Five Blessings in a Row — The Immortal Maiden Brings a Child, 2025. Musicians: Xiaona, Sisi, J, Leyi and Chache. Puppeteers: Miaozi and Xunyang. Stage: Miaozi, Ayu, Kui and Daodao. Photography: Kui. Playwrights: Mark Six Miao and Leyi. We are looking for performance venues across China; collaborations are welcome. #DIYTheatre #ShanzhaiFiveBlessings #ShanzhaiChaoshanOpera #ChaoshanDialect #TheImmortalMaidenBringsAChild #IronRodPuppetry",
+    "《山寨五福连》2025 潮汕东村 乐手：小纳，丝丝，J，乐怡，叉车 控偶：六合彩苗，寻羊 戏台制作：苗子，阿瑜，馗，刀刀 拍摄：馗 编剧：六合彩苗 敲击乐指导：卤你卤死 寻找全国各地演出场地，欢迎合作洽谈~ #diy戏剧 #山寨五福连#山寨潮剧#Teochewdialect#shanzhai Teochew Opera#《十仙庆寿》": "Shanzhai Five Blessings in a Row, 2025, Dongcun, Chaoshan. Musicians: Xiaona, Sisi, J, Leyi and Chache. Puppeteers: Mark Six Miao and Xunyang. Stage: Miaozi, Ayu, Kui and Daodao. Filming: Kui. Playwright: Mark Six Miao. Percussion guidance: Lu Ni Lu Si. We are looking for performance venues across China; collaborations are welcome. #DIYTheatre #ShanzhaiFiveBlessings #ShanzhaiChaoshanOpera #ChaoshanDialect #TenImmortalsCelebrateLongevity",
+    "上一次在半夜四点非得不写的东西是在上海第二场大课间的前夜。如何重现潮剧团的台后，如果布下一个能抵挡文化消费的结界，好让新正顺一家能心安理得地泡功夫茶，好让我们本来就可以做本来的事情。\n\n要怎么解释山寨潮剧，结果大家是在演虫子呢？睡下之后，小时候东村那场洪水历历在目，又坐了起来把剧本改成“洪水涨到六合彩苗家门口”\n倒下后感觉可以安息了。\n\n今晚有什么我非得不写的呢？\n也许我应该会躺下": "The last thing I absolutely had to write at four in the morning was on the eve of the second Big Recess in Shanghai. How could we recreate the backstage of a Chaoshan opera troupe while laying down a barrier strong enough to resist cultural consumption—so the Xin Zhengshun family could drink gongfu tea in peace, and so we could simply do what we already do?\n\nHow do you explain Shanzhai Chaoshan opera when everyone ends up playing insects? After I lay down, the flood that swept through Dongcun in my childhood came vividly back to me. I sat up again and rewrote the script as: “The flood rose to the doorstep of Mark Six Miao’s house.” Only then did I feel I could rest.\n\nWhat is it tonight that I absolutely must not write? Maybe I should lie down.",
+}
+
+EMBEDDED_ENGLISH_MARKERS = (
+    '"dongcunxinfu" could',
+    "Li Jiena,",
+    "#What Is a Shanzhai Troupe?",
+)
+
+
+def normalize_english(value: str) -> str:
+    return re.sub(r"\b[Tt]eochew\b", "Chaoshan", value)
+
+
+def embedded_english(value: str) -> str | None:
+    repeated_marker = "Dongcun Xinfu Experimental Theatre x Yunlin Exchange"
+    if value.count(repeated_marker) >= 2:
+        start = value.find(repeated_marker, value.find(repeated_marker) + len(repeated_marker))
+        return normalize_english(value[start:].strip())
+    for marker in EMBEDDED_ENGLISH_MARKERS:
+        start = value.find(marker)
+        if start >= 0:
+            return normalize_english(value[start:].strip())
+    return None
 
 
 def plain(value: Any) -> str:
@@ -98,6 +130,14 @@ def collect_strings(channels: list[dict[str, Any]], nested: dict[str, dict[str, 
 
 def translate_all(strings: list[str], cache: dict[str, str]) -> dict[str, str]:
     cache.update(EXACT_TRANSLATIONS)
+    cache.update(MANUAL_TRANSLATIONS)
+    for value in strings:
+        if value.startswith("微信图片_"):
+            cache[value] = value
+            continue
+        extracted = embedded_english(value)
+        if extracted:
+            cache[value] = extracted
     missing = [value for value in strings if value not in cache]
     if not missing:
         return cache
@@ -131,7 +171,7 @@ def pair(value: Any, cache: dict[str, str], override: str | None = None) -> dict
         en = cache.get(zh, zh)
     else:
         en = zh
-    return {"zh": zh, "en": en}
+    return {"zh": zh, "en": normalize_english(en)}
 
 
 def image_data(block: dict[str, Any]) -> dict[str, Any] | None:
@@ -204,8 +244,11 @@ def clean_channel(channel: dict[str, Any], cache: dict[str, str]) -> dict[str, A
 
 def load_main_channels() -> list[dict[str, Any]]:
     channel_blocks: list[dict[str, Any]] = []
-    for page in range(1, 5):
-        path = GROUP_DIR / f"arena-current-{page}.json"
+    paths = sorted(
+        GROUP_DIR.glob("arena-current-*.json"),
+        key=lambda path: int(path.stem.rsplit("-", 1)[-1]),
+    )
+    for path in paths:
         channel_blocks.extend(
             block for block in json.loads(path.read_text(encoding="utf-8"))["data"] if block.get("type") == "Channel"
         )
@@ -213,11 +256,9 @@ def load_main_channels() -> list[dict[str, Any]]:
     for channel in channel_blocks:
         path = RAW_DIR / f"{channel['slug']}.json"
         payload = json.loads(path.read_text(encoding="utf-8"))
-        data = payload.get("data", [])
-        if channel["slug"] == "essrtdg7kr8":
-            page_two = RAW_DIR / "essrtdg7kr8-page2.json"
-            if page_two.exists():
-                data += json.loads(page_two.read_text(encoding="utf-8")).get("data", [])
+        data = list(payload.get("data", []))
+        for extra_page in sorted(RAW_DIR.glob(f"{channel['slug']}-page*.json")):
+            data.extend(json.loads(extra_page.read_text(encoding="utf-8")).get("data", []))
         channels.append({**channel, "data": data})
     return channels
 
@@ -241,9 +282,10 @@ def main() -> None:
     cache = translate_all(collect_strings(channels, nested), load_cache())
     CACHE.parent.mkdir(parents=True, exist_ok=True)
     CACHE.write_text(json.dumps(cache, ensure_ascii=False, indent=2), encoding="utf-8")
+    today = datetime.now(ZoneInfo("Asia/Shanghai")).date().isoformat()
     payload = {
-        "syncedAt": "2026-10-12",
-        "sourceUpdatedAt": "2026-10-12",
+        "syncedAt": today,
+        "sourceUpdatedAt": today,
         "channels": [clean_channel(channel, cache) for channel in channels],
         "nestedChannels": {slug: clean_channel(channel, cache) for slug, channel in nested.items()},
     }

@@ -2,7 +2,7 @@
 
 The bilingual living-archive website of **Dongcun Xinfu Shanzhai Chaoshan Opera Troupe / 东村新妇山寨剧团**.
 
-Live site: [dongcun-xinfu.grassyridge6.chatgpt.site](https://dongcun-xinfu.grassyridge6.chatgpt.site)
+Live site: [dongcun-xinfu.popoqst.chatgpt.site](https://dongcun-xinfu.popoqst.chatgpt.site)
 
 This project rebuilds the troupe’s public Are.na archive as a standalone Chinese–English website while preserving the original channel and block order. It includes a one-click language switch, an animated stage entrance, and a visual system drawn from the troupe’s photographs and textile materials.
 

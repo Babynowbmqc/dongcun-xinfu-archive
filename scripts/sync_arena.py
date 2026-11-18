@@ -56,6 +56,9 @@ EXACT_TRANSLATIONS = {
 }
 
 MANUAL_TRANSLATIONS = {
+    "致观众": "To the Audience",
+    "五福连正面": "Five Blessings in a Row — Front",
+    "海口-cheruby明信片": "Haikou — CHERUBY Postcard",
     "四点以后": "After Four O’Clock",
     "以下这段对话我一直想写下来，具体是在什么时候呢？我也记不清，反正是从超酱还从来没有待到过十二点钟的年纪开始。": "I have long wanted to write down the following conversation. When exactly was it? I can’t quite remember. In any case, it began back when Chaojiang was still too young ever to stay up until midnight.",
     "东村新妇反面": "Dongcun Xinfu — Reverse",
@@ -70,6 +73,7 @@ EMBEDDED_ENGLISH_MARKERS = (
     '"dongcunxinfu" could',
     "Li Jiena,",
     "#What Is a Shanzhai Troupe?",
+    "For zhuyan,",
 )
 
 
